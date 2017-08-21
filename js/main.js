@@ -37,12 +37,25 @@ $(function(){
 
   function printBoard(columns, rows){
     //prints gameBoard
-    for (var i=0; i<rows; i++){
+    for (var i=-1; i<rows; i++){
       var rowDiv = $('<div>').addClass('row');
 
-      for (var j=0; j<columns; j++){
-        rowDiv.append($('<div>').addClass('col').text(`i, ${i} and j, ${j}`));
-
+      for (var j=-1; j<columns; j++){
+        // row headers
+        if(i==-1){
+          if (j==-1){
+            //blank corner div
+            rowDiv.append($('<div>').addClass('col').text(` `));
+          } else {
+            rowDiv.append($('<div>').addClass('col').text(`row header ${gameRows[j]}`));
+          }
+        } else if (j==-1) {
+          //print column headers
+          rowDiv.append($('<div>').addClass('col').text(`col header ${gameColumns[i]}`));
+        } else {
+          //regular grid printing
+          rowDiv.append($('<div>').addClass('col').text(`i, ${i} and j, ${j}`));
+        }
       }
       $('#gameBoard').append(rowDiv);
     }
