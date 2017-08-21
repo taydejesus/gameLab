@@ -38,8 +38,8 @@ $(function(){
         var tile = generateTile();
         gameGrid[i][j] = tile;
         if (tile) {
-          gameRows[i]++;
-          gameColumns[j]++;
+          gameRows[j]++;
+          gameColumns[i]++;
         }
       }
     }
@@ -55,31 +55,47 @@ $(function(){
   }
 
   function printBoard(columns, rows){
-    for (var i=-1; i<rows; i++){
+    for (var row_num = -1; row_num < rows; row_num++){
       var rowDiv = $('<div>').addClass('row');
 
-      for (var j=-1; j<columns; j++){
-        // row headers
-        if(i==-1){
-          if (j==-1){
-            //blank corner div
-            rowDiv.append($('<div>').addClass('col').addClass('header').text(` `));
-          } else {
-            rowDiv.append($('<div>').addClass('col').addClass('header').text(`${gameRows[j]}`));
-          }
-        } else if (j==-1) {
-          //print column headers
-          rowDiv.append($('<div>').addClass('col').addClass('header').text(`${gameColumns[i]}`));
+      for (var col_num = -1; col_num < columns; col_num++){
+        if(isRowHeader(row_num)) {
+          createRowHeaderItems(col_num, rowDiv)
+        } else if (isColHeader(col_num)) {
+          createColHeaderItems(row_num, rowDiv)
         } else {
-          //regular grid printing
-          var tile =$('<div>').addClass('col').text(`i, ${i} and j, ${j}`);
-          addClick(tile, i, j);
-          rowDiv.append(tile);
+          createGridItems(row_num, col_num, rowDiv)
         }
       }
+
       $('#gameBoard').append(rowDiv);
     }
   }
+
+  function isRowHeader(col_num) {
+    return col_num == -1
+  }
+
+  function isColHeader(row_num) {
+    return row_num == -1
+  }
+
+  function createRowHeaderItems(col_num, rowDiv) {
+    return (col_num === -1)
+      ? rowDiv.append($('<div>').addClass('col').addClass('header').text(` `))
+      : rowDiv.append($('<div>').addClass('col').addClass('header').text(`${gameRows[col_num ] }`))
+  }
+
+  function createColHeaderItems(row_num, rowDiv) {
+    return rowDiv.append($('<div>').addClass('col').addClass('header').text(`${gameColumns[row_num]}`));
+  }
+
+  function createGridItems(row_num, col_num, rowDiv) {
+    var tile = $('<div>').addClass('col').text(`row_num, ${row_num} and col_num ,  ${col_num } `);
+    addClick(tile, row_num, col_num ) ;
+    rowDiv.append(tile);
+  }
+
   function addClick(tile, row, column){
     tile.on('click', () => {
       console.log('row', row)
@@ -93,6 +109,10 @@ $(function(){
     });
   }
 
+  function addClickUp(y, x) {
+    console.log(x + y, 'heyyyy');
+    return y + x;
+  }
 
-
+  window.addClickUp = addClickUp;
 })
