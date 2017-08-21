@@ -5,3 +5,12 @@ body {
 h1 {
   margin: 2em;
 }
+
+.header {
+  background-color: #eee;
+}
+
+#gameBoard > div {
+  background-color: #ccc;
+  
+}
