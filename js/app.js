@@ -1,5 +1,7 @@
 App = (function(){
   return {
+    numberOfRows: 5,
+    numberOfColumns: 5,
     gameGrid: [],
     gameRows: [],
     gameColumns: [],
@@ -87,7 +89,7 @@ App = (function(){
     },
 
     checkIfWon: function() {
-      if (!tilesToClick){
+      if (!this.tilesToClick){
         //YOU WON
         console.log("winner!!");
       }
