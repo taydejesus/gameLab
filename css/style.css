@@ -1,16 +1,22 @@
 body {
   text-align: center;
+  background-color: #F7FFF6;
 }
 
 h1 {
   margin: 2em;
+  color: #5A7D9B;
 }
 
 .header {
-  background-color: #eee;
+  background-color: #C9DAEA;
 }
 
 #gameBoard > div {
-  background-color: #ccc;
-  
+  background-color: #fff;
+}
+
+.item {
+  padding: 1em 0;
+  border: 1px solid #C9DAEA;
 }

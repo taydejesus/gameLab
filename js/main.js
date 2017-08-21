@@ -3,6 +3,7 @@ $(function(){
   var gameRows = [];
   var gameColumns = [];
   var risk = 0.4;
+  var tilesToClick = 0;
 
   setup(5,5);
 
@@ -40,6 +41,8 @@ $(function(){
         if (tile) {
           gameRows[j]++;
           gameColumns[i]++;
+        } else {
+          tilesToClick++;
         }
       }
     }
@@ -82,29 +85,29 @@ $(function(){
 
   function createRowHeaderItems(col_num, rowDiv) {
     return (col_num === -1)
-      ? rowDiv.append($('<div>').addClass('col').addClass('header').text(` `))
-      : rowDiv.append($('<div>').addClass('col').addClass('header').text(`${gameRows[col_num ] }`))
+      ? rowDiv.append($('<div>').addClass('col header item'))
+      : rowDiv.append($('<div>').addClass('col header item').text(`${gameRows[col_num ] }`))
   }
 
   function createColHeaderItems(row_num, rowDiv) {
-    return rowDiv.append($('<div>').addClass('col').addClass('header').text(`${gameColumns[row_num]}`));
+    return rowDiv.append($('<div>').addClass('col header item').text(`${gameColumns[row_num]}`));
   }
 
   function createGridItems(row_num, col_num, rowDiv) {
-    var tile = $('<div>').addClass('col').text(`row_num, ${row_num} and col_num ,  ${col_num } `);
+    var tile = $('<div>').addClass('col item');
     addClick(tile, row_num, col_num ) ;
     rowDiv.append(tile);
   }
 
   function addClick(tile, row, column){
     tile.on('click', () => {
-      console.log('row', row)
-      console.log('col', column);
       if (gameGrid[row][column]){
         //you lose
         alert("you lose");
       } else {
-        tile.css('background-color', 'green');
+        tilesToClick--;
+        tile.css('background-color', '#A9CBB7');
+        //TODO check if won
       }
     });
   }
