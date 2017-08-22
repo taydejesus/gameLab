@@ -3,8 +3,8 @@ StartPage = (function(){
     createInput: function(){
       $('.container').append($('<p>').text('Optional: input number of rows and columns'));
       var form = $('<form>');
-      var rows = $('<input>').attr('type', 'text');
-      var cols = $('<input>').attr('type', 'text');
+      var rows = $('<input>').attr('type', 'number').addClass('row-input');
+      var cols = $('<input>').attr('type', 'number').addClass('col-input');
 
       form.append("Number of rows: ").append(rows);
       form.append("Number of columns: ").append(cols);
@@ -15,13 +15,13 @@ StartPage = (function(){
       var startButton = $('<button>').attr('type', 'submit').addClass('startButton');
       startButton.text('Start');
       //start game on click
-      startButton.on('click', ()=>App.setup(App.numberOfRows, App.numberOfColumns)); //TODO change to get inputs
+      startButton.on('click', ()=>App.startGame($('.row-input').val(), $('.col-input').val())); //TODO change to get inputs
       $('.container').append(startButton);
     },
 
     printInstructions: function(){
       $('.container').append($('<h3>').addClass('instruction-header').text('Instructions'));
-      var instructionText = "The numbers that label the rows and columns let you know how many 'bad' blocks are in that respective row or column. Click all the 'good' blocks to win!";
+      var instructionText = "The numbers that label the rows and columns let you know how many 'bad' blocks are in that respective row or column. Click all the 'good' blocks to win! Right-click to flag tiles";
       $('.container').append($('<p>').addClass('instruction-text').text(instructionText));
     },
 
