@@ -127,18 +127,27 @@ App = (function(){
       });
     },
 
+    makeUnclickable: function(item){
+      item.addClass('unclickable');
+    },
+
     markMine: function(tile){
-      //mark not a mine
-      tile.css('background-color', '#fff');
-      var flagImage = $('<img>').attr('src', 'images/flag.png').attr('alt', 'flag icon').addClass('flag');
-      tile.append(flagImage);
-      //make unclickable TODO
+      if (tile.hasClass('unclickable')){
+        tile.removeClass('unclickable');
+        tile.empty();
+      } else {
+        //mark not a mine
+        tile.css('background-color', '#fff');
+        var flagImage = $('<img>').attr('src', 'images/flag.png').attr('alt', 'flag icon').addClass('flag');
+        tile.append(flagImage);
+        App.makeUnclickable(tile);
+      }
     },
 
     addClick: function(tile, row, column){
       tile.mousedown(function(e){
         e.preventDefault();
-        if (e.which == 1) {
+        if (e.which == 1 && !tile.hasClass('unclickable')) {
           App.clickBox(tile, row, column);
         } else if (e.which == 3) {
           App.markMine(tile);
