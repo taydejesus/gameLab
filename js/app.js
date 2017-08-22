@@ -86,29 +86,32 @@ App = (function(){
       }
     },
 
-    checkIfWon: function() {
-      if (!this.tilesToClick){
-        this.winner();
-      }
-    },
     winner: function(){
+      console.log('here')
       var text = $('<h2>').text('You won!').addClass('winner message');
       var messageContainer = $('<div>').addClass('message-container');
       messageContainer.append(text).append(this.createResetButton());
       $('#gameBoard').append(messageContainer);
     },
+
+    checkIfWon: function() {
+      if (!this.tilesToClick){
+        this.winner();
+      }
+    },
+
     loser: function(){
       var text = $('<h2>').text('You lose...').addClass('loser message');
       var messageContainer = $('<div>').addClass('message-container');
       messageContainer.append(text).append(this.createResetButton());
       $('#gameBoard').append(messageContainer);
     },
+
     createResetButton: function(){
       var button = $('<button>').addClass('startButton playAgain').text('Play Again');
       button.on('click', ()=>this.setup(this.numberOfRows, this.numberOfColumns));
       return button
     },
-
 
     addClick: function(tile, row, column){
       tile.on('click', () => {
@@ -123,10 +126,11 @@ App = (function(){
         }
       });
     },
-
+    
     setup: function(columns, rows) {
       this.gameRows = [];
       this.gameColumns = [];
+      this.tilesToClick = 0;
       $('.container').empty();
       this.initRowsCols(columns, rows);
       this.populateGameGrid(columns, rows);
