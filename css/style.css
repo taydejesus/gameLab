@@ -18,17 +18,17 @@ h3, p{
   margin: 0 auto;
 }
 
-.header {
-  background-color: #C9DAEA;
-}
 
-#gameBoard > div {
-  background-color: #fff;
-}
+
 
 .item {
   padding: 1em 0;
+  background-color: #fff;
   border: 1px solid #C9DAEA;
+}
+
+.header {
+  background-color: #C9DAEA;
 }
 
 .startButton {
@@ -38,5 +38,27 @@ h3, p{
   background-color: #C9DAEA;
   font-size: 2rem;
   padding: .5em 1em;
+  margin-top: .05em;
   margin-bottom: 2em;
+
+}
+
+.message-container {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  background-color: none;
+}
+
+.message {
+  font-size: 5rem;
+  color: #5A7D9B;
+  text-shadow: .1em .1em .7em #000000;
+  transform: rotate(-10deg) translate(-50%, -50%);
+}
+
+.playAgain {
+  display: block;
+  margin-top: 2em;
+  transform: translate(-50%, -50%);
 }
