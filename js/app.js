@@ -63,7 +63,7 @@ App = (function(){
     },
 
     createGridItems: function(row_num, col_num, rowDiv) {
-      var tile = $('<div>').addClass('col item');
+      var tile = $('<div>').addClass('col item').attr('oncontextmenu', 'return false');
       this.addClick(tile, row_num, col_num ) ;
       rowDiv.append(tile);
     },
@@ -94,17 +94,17 @@ App = (function(){
       $('#gameBoard').append(messageContainer);
     },
 
-    checkIfWon: function() {
-      if (!this.tilesToClick){
-        this.winner();
-      }
-    },
-
     loser: function(){
       var text = $('<h2>').text('You lose...').addClass('loser message');
       var messageContainer = $('<div>').addClass('message-container');
       messageContainer.append(text).append(this.createResetButton());
       $('#gameBoard').append(messageContainer);
+    },
+
+    checkIfWon: function() {
+      if (!this.tilesToClick){
+        this.winner();
+      }
     },
 
     createResetButton: function(){
@@ -113,7 +113,7 @@ App = (function(){
       return button
     },
 
-    addClick: function(tile, row, column){
+    clickBox: function(tile, row, column) {
       tile.on('click', () => {
         if (this.gameGrid[row][column]){
           //you lose
@@ -126,7 +126,26 @@ App = (function(){
         }
       });
     },
-    
+
+    markMine: function(tile){
+      //mark not a mine
+      tile.css('background-color', '#fff');
+      var flagImage = $('<img>').attr('src', 'images/flag.png').attr('alt', 'flag icon').addClass('flag');
+      tile.append(flagImage);
+      //make unclickable TODO
+    },
+
+    addClick: function(tile, row, column){
+      tile.mousedown(function(e){
+        e.preventDefault();
+        if (e.which == 1) {
+          App.clickBox(tile, row, column);
+        } else if (e.which == 3) {
+          App.markMine(tile);
+        }
+      });
+    },
+
     setup: function(columns, rows) {
       this.gameRows = [];
       this.gameColumns = [];

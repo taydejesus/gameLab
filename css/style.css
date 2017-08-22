@@ -10,15 +10,11 @@ h1 {
   color: #5A7D9B;
 }
 
-
 .instruction-text {
   width: 20%;
   text-align: justify;
   margin: 0 auto;
 }
-
-
-
 
 .item {
   padding: .8em 0;
@@ -41,7 +37,6 @@ h1 {
   padding: .5em 1em;
   margin-top: .05em;
   margin-bottom: 2em;
-
 }
 
 .message-container {
@@ -62,4 +57,8 @@ h1 {
   display: block;
   margin-top: 2em;
   transform: translate(-50%, -50%);
+}
+
+.flag {
+  height: 2em;
 }
