@@ -86,20 +86,23 @@ App = (function(){
       }
     },
 
-    winner: function(){
-      console.log('here')
-      var text = $('<h2>').text('You won!').addClass('winner message');
+    endGame: function(textNode){
       var messageContainer = $('<div>').addClass('message-container');
-      messageContainer.append(text).append(this.createResetButton());
+      messageContainer.append(textNode).append(this.createResetButton());
       $('#gameBoard').append(messageContainer);
+    },
+
+    winner: function(){
+      var text = $('<h2>').text('You won!').addClass('winner message');
+      this.endGame(text);
     },
 
     loser: function(){
       var text = $('<h2>').text('You lose...').addClass('loser message');
-      var messageContainer = $('<div>').addClass('message-container');
-      messageContainer.append(text).append(this.createResetButton());
-      $('#gameBoard').append(messageContainer);
+      this.endGame(text);
     },
+
+
 
     checkIfWon: function() {
       if (!this.tilesToClick){
