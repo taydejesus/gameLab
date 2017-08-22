@@ -8,8 +8,6 @@ App = (function(){
     risk: 0.4,
     tilesToClick: 0,
 
-
-
     initRowsCols: function(columns, rows){
       //initialize columns and rows arrays
       for (var i=0; i<rows;i++){
@@ -99,6 +97,7 @@ App = (function(){
       tile.on('click', () => {
         if (this.gameGrid[row][column]){
           //you lose
+          tile.css('background-color', '#f69c9c');
           alert("you lose");
         } else {
           this.tilesToClick--;
@@ -109,11 +108,11 @@ App = (function(){
     },
 
     setup: function(columns, rows) {
+      $('.container').empty();
       this.initRowsCols(columns, rows);
       this.populateGameGrid(columns, rows);
       this.printBoard(columns, rows);
     }
-
 
   }
 })();

@@ -8,6 +8,15 @@ h1 {
   margin: 2em;
   color: #5A7D9B;
 }
+h3, p{
+  color: #5A7D9B;
+}
+
+.instruction-text {
+  width: 20%;
+  text-align: justify;
+  margin: 0 auto;
+}
 
 .header {
   background-color: #C9DAEA;
@@ -20,4 +29,14 @@ h1 {
 .item {
   padding: 1em 0;
   border: 1px solid #C9DAEA;
+}
+
+.startButton {
+  border-radius: 5px;
+  border: 1px solid #5A7D9B;
+  color: #5A7D9B;
+  background-color: #C9DAEA;
+  font-size: 2rem;
+  padding: .5em 1em;
+  margin-bottom: 2em;
 }
