@@ -30,9 +30,9 @@ GameSession = (function(){
     },
 
     populateGameGrid: function(columns, rows) {
-      for (var row_num=0; row_num<rows; row_num++){
+      for (var row_num=0; row_num<rows; row_num++) {
         this.gameGrid.push([]);
-        for (var col_num=0; col_num<columns; col_num++){
+        for (var col_num=0; col_num<columns; col_num++) {
           var tile = this.generateTile();
           this.gameGrid[row_num][col_num] = tile;
           if (tile.hasBomb) {
@@ -43,8 +43,6 @@ GameSession = (function(){
           }
         }
       }
-      console.log('full rows', this.gameRows);
-      console.log('full cols', this.gameColumns);
     },
 
     isRowHeader: function(col_num) {
@@ -58,7 +56,7 @@ GameSession = (function(){
      createRowHeaderItems: function(col_num, row_num, rowDiv) {
       return (col_num == -1 && row_num == -1) //checks if blank corner header gridItem
         ? rowDiv.append($('<div>').addClass('col header item'))
-        : rowDiv.append($('<div>').addClass('col header item').text(`${this.gameRows[row_num ]}`))
+        : rowDiv.append($('<div>').addClass('col header item').text(`${this.gameRows[row_num]}`));
     },
 
     createColHeaderItems: function(col_num, row_num, rowDiv) {
@@ -67,14 +65,16 @@ GameSession = (function(){
 
     createGridItems: function(row_num, col_num, rowDiv) {
       var tile = $('<div>').addClass('col item').attr('oncontextmenu', 'return false');
-      this.addClick(tile, row_num, col_num ) ;
+      this.addClick(tile, row_num, col_num);
       rowDiv.append(tile);
     },
 
     printBoard: function(columns, rows){
       for (var row_num = -1; row_num < rows; row_num++){
+        //create new row
         var rowDiv = $('<div>').addClass('row');
 
+        //for each column, print either header or tile
         for (var col_num = -1; col_num < columns; col_num++){
           if(this.isRowHeader(col_num)) {
             this.createRowHeaderItems(col_num, row_num, rowDiv)
@@ -88,18 +88,19 @@ GameSession = (function(){
         $('#gameBoard').append(rowDiv);
       }
     },
+
     clickBox: function(tile, row, column) {
       tile.on('click', () => {
         if (this.gameGrid[row][column].hasBomb){
           //you lose
           tile.css('background-color', '#f69c9c');
           App.loser();
-        } else {
-          console.log(this.tilesToClick);
+        } else if (!tile.clicked){
           this.tilesToClick--;
           tile.css('background-color', '#A9CBB7');
           this.checkIfWon();
         }
+        tile.clicked = true;
       });
     },
 

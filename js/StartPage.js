@@ -15,7 +15,7 @@ StartPage = (function(){
       var startButton = $('<button>').attr('type', 'submit').addClass('startButton');
       startButton.text('Start');
       //start game on click
-      startButton.on('click', ()=>App.startGame($('.row-input').val(), $('.col-input').val())); //TODO change to get inputs
+      startButton.on('click', ()=>App.startGame($('.row-input').val(), $('.col-input').val()));
       $('.container').append(startButton);
     },
 
