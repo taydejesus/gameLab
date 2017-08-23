@@ -34,7 +34,7 @@ App = (function(){
 
     createResetButton: function(){
       var button = $('<button>').addClass('startButton playAgain').text('Play Again');
-      button.on('click', ()=>GameSession.setup(GameSession.numberOfRows, GameSession.numberOfColumns));
+      button.on('click', ()=>GameSession.setup(GameSession.numberOfColumns, GameSession.numberOfRows));
       return button
     },
 
