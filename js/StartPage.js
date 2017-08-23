@@ -11,13 +11,25 @@ StartPage = (function(){
       $('.container').append(form);
     },
 
+    validInput: function(){
+      return !($('.row-input').val() > 10 || $('.row-input').val() < 1 || $('.col-input').val() > 10 || $('.col-input').val() < 1);
+
+    },
+
     createStartButton: function(){
       var startButton = $('<button>').attr('type', 'submit').addClass('startButton');
       startButton.text('Start');
       //start game on click
-      startButton.on('click', ()=>App.startGame($('.row-input').val(), $('.col-input').val()));
+      startButton.on('click', ()=>{
+        if (this.validInput()){
+          App.startGame($('.row-input').val(), $('.col-input').val());
+        } else {
+          alert("Column and row values must be between 1 and 10");
+        }
+    });
       $('.container').append(startButton);
     },
+
 
     printInstructions: function(){
       $('.container').append($('<h3>').addClass('instruction-header').text('Instructions'));

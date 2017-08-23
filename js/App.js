@@ -1,7 +1,7 @@
 App = (function(){
   return {
     startGame: function(rows, cols){
-      if (!rows || !cols || rows==0 || cols==0){
+      if (!rows || !cols || rows<=0 || cols<=0){
         rows = 5;
         cols = 5;
       }
