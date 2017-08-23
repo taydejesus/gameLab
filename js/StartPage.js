@@ -12,7 +12,8 @@ StartPage = (function(){
     },
 
     validInput: function(){
-      return !($('.row-input').val() > 10 || $('.row-input').val() < 1 || $('.col-input').val() > 10 || $('.col-input').val() < 1);
+      return (($('.row-input').val() < 10 && $('.row-input').val() > 0) || ($('.row-input').val() == "")) &&
+      (($('.col-input').val() < 10 && $('.col-input').val() > 0) || ($('.col-input').val() == ""));
 
     },
 
