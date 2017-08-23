@@ -1,6 +1,10 @@
 App = (function(){
   return {
     startGame: function(rows, cols){
+      if (!rows || !cols){
+        rows = 5;
+        cols = 5;
+      }
       GameSession.numberOfRows = rows;
       GameSession.numberOfColumns = cols;
       GameSession.setup(rows, cols);
