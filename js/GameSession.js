@@ -16,6 +16,9 @@ GameSession = (function(){
       for (var i=0; i<columns;i++){
         this.gameColumns.push(0);
       }
+console.log('init rows', this.gameRows);
+console.log('init cols', this.gameColumns);
+
     },
 
     generateTile: function(){
@@ -28,20 +31,21 @@ GameSession = (function(){
     },
 
     populateGameGrid: function(columns, rows) {
-      for (var i=0; i<rows; i++){
+      for (var row_num=0; row_num<rows; row_num++){
         this.gameGrid.push([]);
-        for (var j=0; j<columns; j++){
-
+        for (var col_num=0; col_num<columns; col_num++){
           var tile = this.generateTile();
-          this.gameGrid[i][j] = tile;
+          this.gameGrid[row_num][col_num] = tile;
           if (tile.hasBomb) {
-            this.gameRows[j]++;
-            this.gameColumns[i]++;
+            this.gameRows[row_num]++;
+            this.gameColumns[col_num]++;
           } else {
             this.tilesToClick++;
           }
         }
       }
+      console.log('full rows', this.gameRows);
+      console.log('full cols', this.gameColumns);
     },
 
     isRowHeader: function(col_num) {
@@ -52,14 +56,14 @@ GameSession = (function(){
       return row_num == -1
     },
 
-     createRowHeaderItems: function(col_num, rowDiv) {
-      return (col_num === -1)
+     createRowHeaderItems: function(col_num, row_num, rowDiv) {
+      return (col_num == -1 && row_num == -1) //checks if blank corner header gridItem
         ? rowDiv.append($('<div>').addClass('col header item'))
-        : rowDiv.append($('<div>').addClass('col header item').text(`${this.gameRows[col_num ] }`))
+        : rowDiv.append($('<div>').addClass('col header item').text(`${this.gameRows[row_num ]}`))
     },
 
-    createColHeaderItems: function(row_num, rowDiv) {
-      return rowDiv.append($('<div>').addClass('col header item').text(`${this.gameColumns[row_num]}`));
+    createColHeaderItems: function(col_num, row_num, rowDiv) {
+      return rowDiv.append($('<div>').addClass('col header item').text(`${this.gameColumns[col_num]}`));
     },
 
     createGridItems: function(row_num, col_num, rowDiv) {
@@ -73,10 +77,11 @@ GameSession = (function(){
         var rowDiv = $('<div>').addClass('row');
 
         for (var col_num = -1; col_num < columns; col_num++){
-          if(this.isRowHeader(row_num)) {
-            this.createRowHeaderItems(col_num, rowDiv)
-          } else if (this.isColHeader(col_num)) {
-            this.createColHeaderItems(row_num, rowDiv)
+          if(this.isRowHeader(col_num)) {
+            console.log("row header");
+            this.createRowHeaderItems(col_num, row_num, rowDiv)
+          } else if (this.isColHeader(row_num)) {
+            this.createColHeaderItems(col_num, row_num, rowDiv)
           } else {
             this.createGridItems(row_num, col_num, rowDiv)
           }

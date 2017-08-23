@@ -1,13 +1,13 @@
 App = (function(){
   return {
     startGame: function(rows, cols){
-      if (!rows || !cols){
-        rows = 5;
+      if (!rows || !cols || rows==0 || cols==0){
+        rows = 4;
         cols = 5;
       }
       GameSession.numberOfRows = rows;
       GameSession.numberOfColumns = cols;
-      GameSession.setup(rows, cols);
+      GameSession.setup(cols, rows);
     },
 
     endGame: function(textNode){
