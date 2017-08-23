@@ -9,6 +9,8 @@ GameSession = (function(){
     tilesToClick: 0,
 
     initRowsCols: function(columns, rows){
+      this.gameRows = [];
+      this.gameColumns = [];
       //initialize columns and rows arrays
       for (var i=0; i<rows;i++){
         this.gameRows.push(0);
@@ -16,9 +18,6 @@ GameSession = (function(){
       for (var i=0; i<columns;i++){
         this.gameColumns.push(0);
       }
-console.log('init rows', this.gameRows);
-console.log('init cols', this.gameColumns);
-
     },
 
     generateTile: function(){
@@ -49,11 +48,11 @@ console.log('init cols', this.gameColumns);
     },
 
     isRowHeader: function(col_num) {
-      return col_num == -1
+      return col_num == -1;
     },
 
     isColHeader: function(row_num) {
-      return row_num == -1
+      return row_num == -1;
     },
 
      createRowHeaderItems: function(col_num, row_num, rowDiv) {
@@ -78,7 +77,6 @@ console.log('init cols', this.gameColumns);
 
         for (var col_num = -1; col_num < columns; col_num++){
           if(this.isRowHeader(col_num)) {
-            console.log("row header");
             this.createRowHeaderItems(col_num, row_num, rowDiv)
           } else if (this.isColHeader(row_num)) {
             this.createColHeaderItems(col_num, row_num, rowDiv)
@@ -97,6 +95,7 @@ console.log('init cols', this.gameColumns);
           tile.css('background-color', '#f69c9c');
           App.loser();
         } else {
+          console.log(this.tilesToClick);
           this.tilesToClick--;
           tile.css('background-color', '#A9CBB7');
           this.checkIfWon();
@@ -119,6 +118,7 @@ console.log('init cols', this.gameColumns);
       },
 
     addClick: function(tile, row, column){
+
       tile.mousedown(function(e){
         e.preventDefault();
         if (e.which == 1 && !tile.isFlagged) {
@@ -136,8 +136,6 @@ console.log('init cols', this.gameColumns);
     },
 
     setup: function(columns, rows) {
-      this.gameRows = [];
-      this.gameColumns = [];
       this.tilesToClick = 0;
       $('.container').empty();
       this.initRowsCols(columns, rows);
