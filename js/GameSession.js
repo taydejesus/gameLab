@@ -119,12 +119,16 @@ GameSession = (function(){
      * @param {columns} Column number
      */
     clickBox: function(tile, row, column) {
+      var explodeSound = new Audio('./sounds/explode.wav');
+      var flipSound = new Audio('./sounds/flip.wav');
       tile.on('click', () => {
         if (this.gameGrid[row][column].hasBomb){
           //you lose
+          explodeSound.play();
           tile.css('background-color', '#f69c9c');
           App.loser();
         } else if (!tile.clicked){
+          flipSound.play();
           this.tilesToClick--;
           tile.css('background-color', '#A9CBB7');
           this.checkIfWon();
