@@ -36,6 +36,9 @@ App = (function(){
       }
     },
 
+    /*
+     * @return {JQuery Object} button that creates new game sesion on click
+     */
     createResetButton: function(){
       var button = $('<button>').addClass('startButton playAgain').text('Play Again');
       button.on('click', ()=>GameSession.setup(GameSession.numberOfColumns, GameSession.numberOfRows));

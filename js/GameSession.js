@@ -21,6 +21,9 @@ GameSession = (function(){
       }
     },
 
+    /*
+     * @return {Tile} grid item
+     */
     generateTile: function(){
       var tile = new Tile;
       var randomNum = Math.random();
@@ -30,6 +33,12 @@ GameSession = (function(){
       return tile;
     },
 
+    /*
+     * determines whether or not tile has a bomb and
+     * updates headers to match number of bombs
+     * @param {rows} Row number
+     * @param {columns} Column number
+     */
     populateGameGrid: function(columns, rows) {
       for (var row_num=0; row_num<rows; row_num++) {
         this.gameGrid.push([]);
@@ -54,12 +63,18 @@ GameSession = (function(){
       return row_num == -1;
     },
 
+    /*
+     * @return {JQuery Object} row header tiles OR blank tile for top left corner
+     */
      createRowHeaderItems: function(col_num, row_num, rowDiv) {
       return (col_num == -1 && row_num == -1) //checks if blank corner header gridItem
         ? rowDiv.append($('<div>').addClass('col header item'))
         : rowDiv.append($('<div>').addClass('col header item').text(`${this.gameRows[row_num]}`));
     },
 
+    /*
+     * @return {JQuery Object} column header
+     */
     createColHeaderItems: function(col_num, row_num, rowDiv) {
       return rowDiv.append($('<div>').addClass('col header item').text(`${this.gameColumns[col_num]}`));
     },
@@ -70,6 +85,11 @@ GameSession = (function(){
       rowDiv.append(tile);
     },
 
+    /*
+     * Print out the game grid
+     * @param {rows} Row number
+     * @param {columns} Column number
+     */
     printBoard: function(columns, rows){
       for (var row_num = -1; row_num < rows; row_num++){
         //create new row
@@ -90,7 +110,14 @@ GameSession = (function(){
       }
     },
 
-    //function to execute when tile is clicked
+
+    /*
+     * ends game if tile has a bomb or turns it green if not
+     * executes on click of tile
+     * @param {tile} Tile
+     * @param {row} Row number
+     * @param {columns} Column number
+     */
     clickBox: function(tile, row, column) {
       tile.on('click', () => {
         if (this.gameGrid[row][column].hasBomb){
@@ -106,7 +133,10 @@ GameSession = (function(){
       });
     },
 
-    //flag a tile
+    /*
+     * flag or unflag a tile
+     * @param {tile} Tile
+     */
     markMine: function(tile){
       if (tile.isFlagged){ //if already flagged, unflag it
         tile.isFlagged = false;
@@ -120,7 +150,13 @@ GameSession = (function(){
       }
     },
 
-    //add click listeners to tiles
+
+    /*
+     * add click listeners to tiles
+     * @param {tile} Tile
+     * @param {row} Row number
+     * @param {columns} Column number
+     */
     addClick: function(tile, row, column){
       tile.mousedown(function(e){
         e.preventDefault();
@@ -140,6 +176,10 @@ GameSession = (function(){
       }
     },
 
+    /*
+     * @param {columns} number of columns
+     * @param {rows} number of rows
+     */
     setup: function(columns, rows) {
       this.inSession = true;
       this.tilesToClick = 0;

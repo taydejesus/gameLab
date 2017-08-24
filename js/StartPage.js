@@ -12,10 +12,12 @@ StartPage = (function(){
       $('.container').append(form);
     },
 
+    /*
+     * @return {bool} returns false if user input for row and column values is invalid
+     */
     validInput: function(){
       return (($('.row-input').val() < 11 && $('.row-input').val() > 2) || ($('.row-input').val() == "")) &&
       (($('.col-input').val() < 11 && $('.col-input').val() > 2) || ($('.col-input').val() == ""));
-
     },
 
     createStartButton: function(){
