@@ -140,6 +140,7 @@ GameSession = (function(){
     },
 
     setup: function(columns, rows) {
+      this.inSession = true;
       this.tilesToClick = 0;
       $('.container').empty();
       this.initRowsCols(columns, rows);
