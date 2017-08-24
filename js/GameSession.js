@@ -124,7 +124,7 @@ GameSession = (function(){
         e.preventDefault();
         if (e.which == 1 && !tile.isFlagged) {
           GameSession.clickBox(tile, row, column);
-        } else if (e.which == 3) {
+        } else if (e.which == 3 && !tile.clicked) {
           GameSession.markMine(tile);
         }
       });
