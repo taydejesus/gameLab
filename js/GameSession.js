@@ -1,13 +1,13 @@
 GameSession = (function(){
   return {
-    risk: 0.4,
+    risk: 0.4, //chance that a tile will have a bomb
     numberOfRows: 5,
     numberOfColumns: 5,
     gameGrid: [],
-    gameRows: [],
-    gameColumns: [],
-    tilesToClick: 0,
-    inSession: false,
+    gameRows: [], //stores row headers
+    gameColumns: [], //stores column headers
+    tilesToClick: 0, //number of tiles left to win
+    inSession: false, //a game is being played
 
     initRowsCols: function(columns, rows){
       this.gameRows = [];
@@ -90,6 +90,7 @@ GameSession = (function(){
       }
     },
 
+    //function to execute when tile is clicked
     clickBox: function(tile, row, column) {
       tile.on('click', () => {
         if (this.gameGrid[row][column].hasBomb){
@@ -105,20 +106,21 @@ GameSession = (function(){
       });
     },
 
+    //flag a tile
+    markMine: function(tile){
+      if (tile.isFlagged){ //if already flagged, unflag it
+        tile.isFlagged = false;
+        tile.empty();
+      } else {
+        //mark with flag
+        tile.isFlagged = true;
+        tile.css('background-color', '#fff');
+        var flagImage = $('<img>').attr('src', 'images/flag.png').attr('alt', 'flag icon').addClass('flag');
+        tile.append(flagImage);
+      }
+    },
 
-      markMine: function(tile){
-        if (tile.isFlagged){
-          tile.isFlagged = false;
-          tile.empty();
-        } else {
-          //mark with flag
-          tile.isFlagged = true;
-          tile.css('background-color', '#fff');
-          var flagImage = $('<img>').attr('src', 'images/flag.png').attr('alt', 'flag icon').addClass('flag');
-          tile.append(flagImage);
-        }
-      },
-
+    //add click listeners to tiles
     addClick: function(tile, row, column){
       tile.mousedown(function(e){
         e.preventDefault();
@@ -129,7 +131,6 @@ GameSession = (function(){
             GameSession.markMine(tile);
           }
         }
-
       });
     },
 
@@ -146,6 +147,7 @@ GameSession = (function(){
       this.initRowsCols(columns, rows);
       this.populateGameGrid(columns, rows);
       this.printBoard(columns, rows);
+      this.checkIfWon();
     }
   }
 })();

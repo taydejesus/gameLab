@@ -18,11 +18,13 @@ App = (function(){
       $('#gameBoard').append(messageContainer);
     },
 
+    //display win message
     winner: function(){
       var text = $('<h2>').text('You won!').addClass('winner message');
       this.endGame(text);
     },
 
+    //display lose message
     loser: function(){
       var text = $('<h2>').text('You lose...').addClass('loser message');
       this.endGame(text);
@@ -38,7 +40,6 @@ App = (function(){
       var button = $('<button>').addClass('startButton playAgain').text('Play Again');
       button.on('click', ()=>GameSession.setup(GameSession.numberOfColumns, GameSession.numberOfRows));
       return button
-    },
-
+    }
   }
 })();

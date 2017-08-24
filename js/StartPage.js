@@ -1,5 +1,6 @@
 StartPage = (function(){
   return {
+    //display input fields for columns and rows
     createInput: function(){
       $('.container').append($('<p>').text('Optional: input number of rows and columns'));
       var form = $('<form>');
