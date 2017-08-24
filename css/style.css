@@ -6,12 +6,17 @@ body {
 
 h1 {
   font-family: 'Pacifico', cursive;
-  margin: 2em;
+  margin: 1em;
   color: #5A7D9B;
 }
 
 form {
   margin-bottom: 2em;
+}
+
+input {
+  width: 5em;
+  margin: .2em;
 }
 
 .instruction-text {
