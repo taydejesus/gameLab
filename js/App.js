@@ -7,10 +7,12 @@ App = (function(){
       }
       GameSession.numberOfRows = rows;
       GameSession.numberOfColumns = cols;
+      GameSession.inSession = true;
       GameSession.setup(cols, rows);
     },
 
     endGame: function(textNode){
+      GameSession.inSession = false;
       var messageContainer = $('<div>').addClass('message-container');
       messageContainer.append(textNode).append(this.createResetButton());
       $('#gameBoard').append(messageContainer);
