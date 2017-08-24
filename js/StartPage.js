@@ -12,8 +12,8 @@ StartPage = (function(){
     },
 
     validInput: function(){
-      return (($('.row-input').val() < 10 && $('.row-input').val() > 0) || ($('.row-input').val() == "")) &&
-      (($('.col-input').val() < 10 && $('.col-input').val() > 0) || ($('.col-input').val() == ""));
+      return (($('.row-input').val() < 11 && $('.row-input').val() > 1) || ($('.row-input').val() == "")) &&
+      (($('.col-input').val() < 11 && $('.col-input').val() > 1) || ($('.col-input').val() == ""));
 
     },
 
@@ -25,7 +25,7 @@ StartPage = (function(){
         if (this.validInput()){
           App.startGame($('.row-input').val(), $('.col-input').val());
         } else {
-          alert("Column and row values must be between 1 and 10");
+          alert("Column and row values must be between 2 and 10");
         }
     });
       $('.container').append(startButton);
