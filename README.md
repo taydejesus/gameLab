@@ -4,14 +4,13 @@ The name of the game is "Taylor's Game," and it is a puzzle. Sometimes this puzz
 [Play the game](https://taydejesus.github.io/gameLab/)
 
 ### Instructions:
-Numbers labeling each row and column let the user know how many bad tiles are in that row or column. 
+Numbers labeling each row and column let the user know how many bad tiles are in that row or column.
 
-Click all the good tiles to win! 
+Click all the good tiles to win!
 
 Right clicking allows you to flag a tile. Flags prevent accidental clicks on known bad tiles.
 
 ### Future features:
-- Add 'x' or image to mark the 'bad' block the user clicked, since people with a certain colorblindness cannot see the difference between the red and green block colors.
 - Add a button to redirect back to the start page between games sessions
 
 ### Known Bugs:
