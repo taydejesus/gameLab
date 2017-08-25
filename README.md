@@ -7,6 +7,11 @@
 
 ### The Process:
 Wireframe: https://wireframe.cc/hjBf5p
+Trello: https://trello.com/b/FuD0YFTC/gamelab
+
+At the beginning I created a wireframe of the basic layout of the game page. The game simply would feature a simple header and the game board. This layout is used during gameplay, but I later added a start screen that includes instructions and allows a user to input their own grid dimensions.
+
+The file system for the javascript is split into a few files. StartPage.js includes methods to print the start page to the screen and take in the user input. App.js contains the functionality to start and end a game, as well as display messages to tell the user if they won or lost. GameSession contains the logic of the game itself. It draws the game board to the screen, creates the grid system, and allows the user to interact with the board. The grid uses tile objects, as seen in Tile.js. This file only contains the structure of the Tile object.
 
 ### Future features:
 - Add 'x' or image to mark the 'bad' block the user clicked, since people with a certain colorblindness cannot see the difference between the red and green block colors.
@@ -16,7 +21,7 @@ Wireframe: https://wireframe.cc/hjBf5p
 None! Please report bugs!
 
 ### Biggest wins and challenges:
-My biggest win was separating my JS files. Once that occured, it was easier to deal with bugs.
+My biggest win was separating my JS files. Once that was done, it was easier to deal with bugs.
 
 ### The game you chose:
 The name of the game is "Taylor's Game," and it is a puzzle. Sometimes this puzzle will require some educated guessing!
