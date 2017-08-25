@@ -36,8 +36,8 @@ GameSession = (function(){
     /*
      * determines whether or not tile has a bomb and
      * updates headers to match number of bombs
-     * @param {rows} Row number
-     * @param {columns} Column number
+     * @param {Number} rows - Number of rows
+     * @param {Number} columns - Number of columns
      */
     populateGameGrid: function(columns, rows) {
       for (var row_num=0; row_num<rows; row_num++) {
@@ -87,8 +87,8 @@ GameSession = (function(){
 
     /*
      * Print out the game grid
-     * @param {rows} Row number
-     * @param {columns} Column number
+     * @param {Number} rows - Row number
+     * @param {Number} column - Column number
      */
     printBoard: function(columns, rows){
       for (var row_num = -1; row_num < rows; row_num++){
@@ -110,13 +110,24 @@ GameSession = (function(){
       }
     },
 
+    /*
+     * add icon image to a tile
+     * @param {Tile} tile
+     * @param {String} filePath
+     * @param {String} alt - string for alt attribute of image
+     */
+    addIconToTile: function(tile, filePath, alt) {
+      var image = $('<img>').attr('src', filePath).attr('alt', alt).addClass('icon');
+      tile.append(image);
+    },
+
 
     /*
      * ends game if tile has a bomb or turns it green if not
      * executes on click of tile
-     * @param {tile} Tile
-     * @param {row} Row number
-     * @param {columns} Column number
+     * @param {Tile} Tile
+     * @param {Number} row - Row number
+     * @param {Number} column - Column number
      */
     clickBox: function(tile, row, column) {
       var explodeSound = new Audio('./sounds/explode.wav');
@@ -126,6 +137,7 @@ GameSession = (function(){
           //you lose
           explodeSound.play();
           tile.css('background-color', '#f69c9c');
+          this.addIconToTile(tile, 'images/skull.png', 'skull icon');
           App.loser();
         } else if (!tile.clicked){
           flipSound.play();
@@ -139,7 +151,7 @@ GameSession = (function(){
 
     /*
      * flag or unflag a tile
-     * @param {tile} Tile
+     * @param {Tile} tile
      */
     markMine: function(tile){
       if (tile.isFlagged){ //if already flagged, unflag it
@@ -149,17 +161,16 @@ GameSession = (function(){
         //mark with flag
         tile.isFlagged = true;
         tile.css('background-color', '#fff');
-        var flagImage = $('<img>').attr('src', 'images/flag.png').attr('alt', 'flag icon').addClass('flag');
-        tile.append(flagImage);
+        this.addIconToTile(tile, 'images/flag.png', 'flag icon');
       }
     },
 
 
     /*
      * add click listeners to tiles
-     * @param {tile} Tile
-     * @param {row} Row number
-     * @param {columns} Column number
+     * @param {Tile} tile
+     * @param {Number} row - Row number
+     * @param {Number} column -Column number
      */
     addClick: function(tile, row, column){
       tile.mousedown(function(e){
@@ -181,8 +192,8 @@ GameSession = (function(){
     },
 
     /*
-     * @param {columns} number of columns
-     * @param {rows} number of rows
+     * @param {Number} columns - number of columns
+     * @param {Number} rows - number of rows
      */
     setup: function(columns, rows) {
       this.inSession = true;
